@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cinzel:wght@400;500&family=Crimson+Pro:wght@200&family=Permanent+Marker&family=Rowdies:wght@300&family=Space+Mono&family=Special+Elite&family=Trispace:wght@100;200;300;400&display=swap');
+body{
+    background-color: antiquewhite;
+}
+
+.title{
+    text-align: center;
+    font-family: "Rowdies";
+    font-size: 50px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+h1{
+    text-align: center;
+    font-family: "Special Elite";
+    font-size: 100px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;
+    font-family: "Caveat";
+    font-size: 50px;
+    margin-top: 10px;
+    color: red; 
+}
+
+h3{
+    text-align: center;
+    font-family: "Crimson Pro";
+    font-size: 25px; 
+}
+
+.parent{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+
+.movie_poster{
+    position: relative;
+    border: 3px black solid; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+}
+
+.right_movie_scroll{
+    position: absolute;
+    background-size: cover;
+    top: -150px; 
+    width: 100%;
+    left: 300px; 
+    z-index: -5;
+}
+
+.left_movie_scroll{
+    position: absolute;
+    background-size: cover;
+    top: -120px; 
+    width: 100%;
+    right: 300px; 
+    z-index: -5;
+}
+
+
+.camera{
+    position: absolute; 
+    top: -120px; 
+    width: 25%;
+    right: -10px; 
+}
+
+.popcorn{
+    position: absolute; 
+    top: -120px; 
+    width: 19%;
+    left: 10px; 
+}
+
+a{
+    display: block;
+    text-align: center;
+}
+
+a:hover{
+    color: red; 
+}
+
+.ratings{
+    border-color: black; 
+}
+
+.container{
+    text-align: center;
+}

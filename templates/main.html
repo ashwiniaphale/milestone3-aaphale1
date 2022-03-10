@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <form method="POST" action="/logout" align="right">
+            <input type="submit" value="LOGOUT">
+        </form>
+        <div class="title">Ash's Movie Explorer</div>
+        <h1>{{movie_title}}</h1>
+        <h2>{{movie_tagline}}</h2>
+        <h3>{{movie_genre}}</h3>
+        <div class="parent">
+        <img class="movie_poster" src= {{movie_image}}>
+        <img class="left_movie_scroll" src= "/static/moviescroll.png">
+        <img class="right_movie_scroll" src= "/static/moviescroll.png">
+        <img class="camera" src= "/static/camera.png">
+        <img class="popcorn" src= "/static/popcorn.png">
+        </div>
+        <a href={{movie_wiki}}>Click to go to the Wikipedia Page!</a>
+
+        <h2> Comment on this movie! </h2>
+        <form method="POST" action="/viewreact" align="center">
+            <input type="submit" value="Edit Your Comments">
+        </form>
+        <center>
+        <form method="POST" action="/review">
+            <label for="movieID">Movie ID:</label> 
+            <input type="text" name="movieID" value="{{random_movie_id}}" readonly> <br><br>
+            <label for="rating">Rating (out of 5):</label>
+            <input type="text" name="rating"> <br><br>
+            <label for="review">Leave a comment:</label>
+            <input type="text" name="review"> <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <h2> See what others commented! </h2>
+        <div class=ratings>
+        {% for i in range(num_comments) %}
+            <h3>User: {{all_comments[i].current_username}}</h3>
+            <h3>Rating: {{all_comments[i].rating}}</h3>
+            <h3>Review: {{all_comments[i].reviews}}</h3>
+            <h3> ----------------------------------------------------------------------- </h3>
+        {% endfor %}
+        </div>
+        </center>
+    </body>
+</html>
