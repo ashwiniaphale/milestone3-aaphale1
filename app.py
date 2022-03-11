@@ -187,18 +187,26 @@ def commentEndPoint():
     comment_list = []
     for i in full_comments:
         comment_dict = {}
+        comment_dict["id"] = i.id
         comment_dict["reviews"] = i.reviews
         comment_dict["movie_id"] = i.movie_id
         comment_dict["rating"] = i.rating
         comment_list.append(
             comment_dict
         )  # append each element of dictionary to the list
+    print(comment_list)
     return flask.jsonify({"list_all_comments": comment_list})
 
 
 @app.route("/viewreact", methods=["GET", "POST"])
 def viewreact():
     return flask.render_template("index.html")
+
+
+@app.route("/reviewfromid", methods=["GET", "POST"])
+def getComments():
+    CommentsTable.query.filter_by(id=id).delete()
+    db.session.commit()
 
 
 app.run(
