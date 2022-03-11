@@ -195,7 +195,7 @@ def commentEndPoint():
             comment_dict
         )  # append each element of dictionary to the list
     print(comment_list)
-    return flask.jsonify({"list_all_comments": comment_list})
+    return flask.jsonify(comment_list)
 
 
 @app.route("/viewreact", methods=["GET", "POST"])
@@ -205,8 +205,28 @@ def viewreact():
 
 @app.route("/reviewfromid", methods=["GET", "POST"])
 def getComments():
-    CommentsTable.query.filter_by(id=id).delete()
-    db.session.commit()
+    if flask.request.method == "POST":
+        CommentsTable.query.filter_by(
+            current_username=current_user.username
+        ).delete()  # this should delete everything from the db
+        db.session.commit()  # in order to add back only what is shown on the UI
+        new_request = flask.request.json
+        for one_request in new_request:  # copy of milestone 2 comments()
+            rating = one_request["rating"]
+            reviews = one_request["reviews"]
+            movie_id = one_request["movie_id"]
+            now_user = current_user.username
+            db.session.add(
+                CommentsTable(
+                    reviews=reviews,
+                    rating=rating,
+                    movie_id=movie_id,
+                    current_username=now_user,
+                )
+            )
+            db.session.commit()
+            print(new_request)
+    return flask.redirect("/reviewfromdb")  # should send it back to the App.js fetch
 
 
 app.run(

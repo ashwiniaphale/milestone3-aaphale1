@@ -6,16 +6,26 @@ function App() {
   const [list_all_comments, setComment] = useState([]);
 
   useEffect(() => {
-    fetch("/reviewfromdb", { method: "POST" })
-      .then((response) => response.json()
-        .then(data => { setComment(data.list_all_comments); })
-      );
-  }, [setComment])
+    fetch('/reviewfromdb').then(response => response.json()).then(data => {
+      setComment(data);
+    });
+  }, [])
 
   function deleteReview(id) {
-    const newReview = list_all_comments.filter((list_all_comments) => list_all_comments !== id);
-    console.log(newReview)
-    setComment(newReview);
+    const newRatings = list_all_comments.filter(list_all_comments => list_all_comments.id !== id);
+    setComment(newRatings);
+  }
+
+  function saveAllChanges(request) {
+    fetch("/reviewfromid", {
+      method: "POST",
+      headers: {
+        "content_type": "application/json",
+      },
+      body: JSON.stringify(request)
+    }
+    ).then(response => { return response.json() })
+    console.log(request)
   }
 
   return (
@@ -24,15 +34,15 @@ function App() {
         <h2>Your reviews:</h2>
         <table>
           {list_all_comments && list_all_comments.map((list_all_comments) =>
-            <tr>
+            <tr key={list_all_comments.id}>
               <tb><b>Movie ID: {list_all_comments.movie_id}</b></tb>&nbsp;
               <tb><input type="text" defaultValue={list_all_comments.rating}></input></tb> &nbsp;
               <tb><input type="text" defaultValue={list_all_comments.reviews}></input></tb>&nbsp;
-              <button onClick={() => deleteReview(list_all_comments)}>Delete</button>
+              <button onClick={() => deleteReview(list_all_comments.id)}>Delete</button>
             </tr>
           )}
         </table>
-        <button>Save Changes</button>
+        <button onClick={() => saveAllChanges(list_all_comments.id)}>Save All Changes</button>
       </center>
     </div >
   );
