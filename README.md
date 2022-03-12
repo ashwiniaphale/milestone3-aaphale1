@@ -33,12 +33,13 @@ I created a separate function for each piece of information we were fetching for
 The last function in this file is get_wiki_page (calls information from Wiki API). I constructed the Wikipedia article url from the link and the movie title that was passed through as a query parameter from the get_title function above. 
 
 ### Heroku
-The application is deployed on Heroku. We created a heroku database in order to store information for the application. The application can be found at: https://vast-forest-34825.herokuapp.com/
+The application is deployed on Heroku. We created a heroku database in order to store information for the application. The application can be found at: https://vast-forest-34825.herokuapp.com/ (FROM MILESTONE 2)
 
 ## Main Changes in Milestone 3
 
 ### React Page
 On the main movie page, the user has the option to click a button to edit/delete their commments. This button takes you to a React page which utilizes useState hooks. It contains a useEffect() hook that uses the fetch method to get JSON data and passes it through setComment(). I created two functions: deleteReview() and saveAllChanges(). DeleteReview removes a comment from the list (just from the UI, not the DB). SaveAllChanges() takes in a request and fetches JSON data from an endpoint we created within app.py. This endpoint deletes all comments from the current user and adds back only the ones remaining on the UI. It also alerts when changes have been saved. I pass through all the comments and their attributes through the return statement of the React page. 
+* I imported { useState, useEffect } from 'react'
 
 ## Answered Questions
 
@@ -69,9 +70,16 @@ You would need to create a .env file within the project and add
 * heroku create
 * heroku addons:create heroku-postgresql:hobby-dev
 * heroku config -- to get database_url and change it to REALDATABASE_URL and change postgres to postgresql
-#### Install React
+#### Install React/Node
+* brew update
+* brew install node
+* sudo apt install npm, pip install npm
+* npm install react
 #### How to run app
-Type python or python3 app.py into your terminal once you are within the correct directory
+* npm ci
+* npm run build
+* Then, type python or python3 app.py into your terminal once you are within the correct directory
+
 
 ### What was the hardest part of the project for you? Most valuable learning of overall project?
 * The hardest part was byfar Milestone 3. I feel like I had a bad grasp and understanding going into Milestone 3 and would have liked extra time for this project. Also, React felt very abstract to me and I did not get enough practice in. I was able to follow in the demos but combining it with the database was definitely the hardest part of this project.
