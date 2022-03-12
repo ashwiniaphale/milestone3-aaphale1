@@ -25,7 +25,8 @@ function App() {
       body: JSON.stringify(request)
     }
     ).then(response => { return response.json() })
-    console.log(request)
+      .then(console.log(request))
+    alert("Your changes were saved.")
   }
 
   return (
@@ -42,7 +43,7 @@ function App() {
             </tr>
           )}
         </table>
-        <button onClick={() => saveAllChanges(list_all_comments.id)}>Save All Changes</button>
+        <button onClick={() => saveAllChanges(list_all_comments)}>Save All Changes</button>
       </center>
     </div >
   );

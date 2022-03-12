@@ -44,10 +44,12 @@ bp = flask.Blueprint(
 )
 
 # route for serving React page
-@bp.route("/differentroute")
+@bp.route("/blueprintroute", methods=["GET", "POST"])
 def index():
-    # NB: DO NOT add an "index.html" file in your normal templates folder
-    # Flask will stop serving this React page correctly
+    if flask.request.method == "POST":
+        # NB: DO NOT add an "index.html" file in your normal templates folder
+        # Flask will stop serving this React page correctly
+        return flask.render_template("index.html")
     return flask.render_template("index.html")
 
 
@@ -198,11 +200,6 @@ def commentEndPoint():
     return flask.jsonify(comment_list)
 
 
-@app.route("/viewreact", methods=["GET", "POST"])
-def viewreact():
-    return flask.render_template("index.html")
-
-
 @app.route("/reviewfromid", methods=["GET", "POST"])
 def getComments():
     if flask.request.method == "POST":
@@ -211,22 +208,22 @@ def getComments():
         ).delete()  # this should delete everything from the db
         db.session.commit()  # in order to add back only what is shown on the UI
         new_request = flask.request.json
-        for one_request in new_request:  # copy of milestone 2 comments()
-            rating = one_request["rating"]
-            reviews = one_request["reviews"]
-            movie_id = one_request["movie_id"]
-            now_user = current_user.username
+        print(new_request)
+        for one_comment in new_request:  # copy of milestone 2 comments()
+            rating = one_comment["rating"]
+            reviews = one_comment["reviews"]
+            movie_id = one_comment["movie_id"]
             db.session.add(
                 CommentsTable(
                     reviews=reviews,
                     rating=rating,
                     movie_id=movie_id,
-                    current_username=now_user,
+                    current_username=current_user.username,
                 )
             )
             db.session.commit()
-            print(new_request)
-    return flask.redirect("/reviewfromdb")  # should send it back to the App.js fetch
+
+    return flask.redirect("/blueprintroute")  # should send it back to the App.js fetch
 
 
 app.run(

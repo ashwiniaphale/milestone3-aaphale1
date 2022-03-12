@@ -1,5 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cinzel:wght@400;500&family=Crimson+Pro:wght@200&family=Permanent+Marker&family=Rowdies:wght@300&family=Space+Mono&family=Special+Elite&family=Trispace:wght@100;200;300;400&display=swap');
+
+body{
+  background-color: antiquewhite;
+}
+h2
+{
+  text-align: center;
+  font-family: "Caveat";
+  font-size: 100px;
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+
 .App {
   text-align: center;
+  background-color: antiquewhite;
 }
 
 .App-logo {
