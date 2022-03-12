@@ -196,7 +196,6 @@ def commentEndPoint():
         comment_list.append(
             comment_dict
         )  # append each element of dictionary to the list
-    print(comment_list)
     return flask.jsonify(comment_list)
 
 
